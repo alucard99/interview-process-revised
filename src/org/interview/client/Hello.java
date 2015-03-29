@@ -91,6 +91,7 @@ public class Hello implements EntryPoint {
 	    nameField.setText("Gwt User");
         // We can add style names to widgets
         sendButton.addStyleName("sendButton");
+        sendButton.setBackground(red);
         
         // Focus the cursor on the name field when the app loads
         nameField.setFocus(true);
@@ -120,6 +121,12 @@ public class Hello implements EntryPoint {
             }
         });
         
+        // Add a handler to clear the person's text box
+        clearPersonButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+            	nameField.setText("");
+            }
+        });
 
         // Create a handler for the sendButton and nameField
         class MyHandler implements ClickHandler, KeyUpHandler {
@@ -147,7 +154,7 @@ public class Hello implements EntryPoint {
                 errorLabel.setText("");
                 String textToServer = nameField.getText();
                 if (!FieldVerifier.isValidName(textToServer)) {
-                    errorLabel.setText("Please enter more than 4 caracters");
+                    errorLabel.setText("You entered less than 4 characters.  Please enter more than 4 caracters");
                     return;
                 }
 
